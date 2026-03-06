@@ -18,4 +18,20 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("react") || id.includes("scheduler")) return "react-core";
+          if (id.includes("react-router")) return "router";
+          if (id.includes("framer-motion")) return "motion";
+          if (id.includes("recharts")) return "charts";
+          if (id.includes("@iconify")) return "icons";
+          if (id.includes("@tanstack/react-query")) return "query";
+          if (id.includes("@radix-ui") || id.includes("cmdk") || id.includes("vaul")) return "ui";
+        },
+      },
+    },
+  },
 }));

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Icon } from "@iconify/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { format, addDays, addWeeks, addMonths } from "date-fns";
 import { useAuth } from "@/contexts/AuthContext";
 import { taskService, Task } from "@/services/tasks";
@@ -16,6 +17,7 @@ import { useNotificationReminders } from "@/hooks/useNotificationReminders";
 import { getDailyQuote } from "@/lib/quotes";
 
 const Index = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   useNotificationReminders();
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -220,7 +222,7 @@ const Index = () => {
           </div>
           <motion.button
             whileTap={{ scale: 0.9 }}
-            onClick={() => window.location.href = "/settings"}
+            onClick={() => navigate("/settings")}
             className="flex h-10 w-10 items-center justify-center rounded-full bg-card border border-gray-300 dark:border-gray-300 shadow-sm"
           >
             <Icon icon="mdi:cog" className="text-lg text-muted-foreground" />

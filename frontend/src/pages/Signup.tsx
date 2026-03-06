@@ -4,11 +4,13 @@ import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import { authService } from "@/services/auth";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { toast } from "sonner";
 
 const Signup = () => {
   const navigate = useNavigate();
   const { setUser } = useAuth();
+  const { resolvedTheme } = useTheme();
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -46,7 +48,11 @@ const Signup = () => {
     >
       <div className="w-full max-w-sm lg:max-w-[450px]">
         <div className="mb-8 text-center">
-          <img src="/logoo.png" alt="HabitFlow logo" className="mx-auto mb-3 h-12 w-12 object-contain" />
+          <img
+            src="/logoo.png"
+            alt="HabitFlow logo"
+            className={`mx-auto mb-3 h-12 w-12 object-contain ${resolvedTheme === "light" ? "invert" : "invert-0"}`}
+          />
           <h1 className="text-2xl font-bold text-foreground">Create Account</h1>
           <p className="text-muted-foreground mt-1">Join HabitFlow today</p>
         </div>
